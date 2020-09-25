@@ -24,5 +24,5 @@ def solution(tickets):
 
 
 
-tickets = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]
+tickets = [["ICN", "AAA"], ["ICN", "BBB"], ["BBB", "CCC"], ["CCC", "BBB"], ["BBB","ICN"]]
 print(solution(tickets))
