@@ -7,26 +7,17 @@ def solution(begin, target, words):
     elif target not in words:
         return 0
     else:
-        answer = 0
-        search(begin, target, words, answer)
+        count = 0
+        visit = [0] * len(words)
 
-    return answer
-
-def search(begin, target, words, answer):
-    if begin == target:
-        return answer
-    else:
-        temp = []
-        answer += 1
-
-        for word in words:
-            if diff(begin, word):
-                temp.append(word)
-                words.remove(word)
-
-        for i in range(len(temp)):
-            search(temp[i], target, words, answer)
-
+        while True:
+            temp = []
+            for word in words:
+                if diff(begin, word):
+                    temp.append(word)
+            visit[count] = temp
+            if target in visit[count]:
+                return count
 
 def diff(w1, w2):
     diff_count = 0
