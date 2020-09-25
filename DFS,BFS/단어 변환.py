@@ -7,17 +7,30 @@ def solution(begin, target, words):
     elif target not in words:
         return 0
     else:
-        count = 0
-        visit = [0] * len(words)
+        G = dict()
+        words.reverse()
+        words.append(begin)
+        words.reverse()
 
-        while True:
-            temp = []
-            for word in words:
-                if diff(begin, word):
-                    temp.append(word)
-            visit[count] = temp
-            if target in visit[count]:
-                return count
+        # 아마 여기서 시간 초과가 발생할것으로 예상.. 어떻게 수정하지?
+        for w1 in words:
+            for w2 in words:
+                if diff(w1, w2):
+                    if w1 in G:
+                        G[w1].append(w2)
+                    else:
+                        G[w1] = [w2]
+
+        answer = []
+        st = [begin]
+
+        while st:
+            top = st.pop()
+            answer.append(top)
+            for i in range(len(G[top])):
+                st.append(G[top][i])
+            if top == target:
+                return len(answer) - 1
 
 def diff(w1, w2):
     diff_count = 0
@@ -30,10 +43,15 @@ def diff(w1, w2):
         return True
     else:
         return False
+#
+# begin = "hit"
+# target = "cog"
+# words = ["hot", "dot", "dog", "lot", "log", "cog"]
+# result = 4
 
 begin = "hit"
-target = "cog"
-words = ["hot", "dot", "dog", "lot", "log", "cog"]
-result = 4
+target = "hhh"
+words = ["hhh","hht"]
+result = 2
 
 print(solution(begin, target, words))
