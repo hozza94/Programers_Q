@@ -1,34 +1,32 @@
-def solution(bridge_length, weight, truck_weights):
+def solution(bridge_length,weight,truck_weights):
     answer = 0
-    ntruck = len(truck_weights)
+    bridge_on = [0]* bridge_length
+    curr_weight = 0
 
-    truck_weights.sort() # 4, 5, 6, 7
-
-    mid = [0] * bridge_length # [0,0]
-    end = []
-
-    # 가장 작은숫자부터 더해서 진행
-    while len(end) < ntruck:
+    while truck_weights:
         answer += 1
+        bridge_out = bridge_on.pop(0)
+        curr_weight -= bridge_out
 
-        if mid[-1] != 0:
-            end.append(mid[-1])
-            mid[-1] = 0
+        if curr_weight + truck_weights[0] > weight:
+            bridge_on.append(0)
+        else:
+            truck = truck_weights.pop(0)
+            bridge_on.append(truck)
+            curr_weight += truck
 
-        for i in range(1, len(mid)):
-            mid[i] = mid[i-1]
-        mid[0] = 0
 
-        if truck_weights:
-            if (sum(mid) + truck_weights[0]) < weight:
-                mid[0] = truck_weights.pop(0)
+    while curr_weight>0:
+        answer +=1
+        bridge_out = bridge_on.pop(0)
+        curr_weight -=bridge_out
 
     return answer
 
 
 bridge_length = 100
 weight = 100
-truck_weights = [10]
+truck_weights = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
 result = 101
 
 print(solution(bridge_length, weight, truck_weights))
