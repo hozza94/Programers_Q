@@ -37,7 +37,7 @@ def solution(skill, skill_trees):
     return answer
 
 skill = "CBD"
-skill_trees = ["BACDE", "CBADF", "AECB", "BDA", "AQWER"]
-result = 2
+skill_trees = ["BACDE", "CBADF", "AECB", "BDA", "AQWER"] # "AQWER"은 선행스킬이 존재하지않으므로 통과가 되야함
+result = 3
 
-print(solution(skill,skill_trees))
+print(solution(skill, skill_trees))
