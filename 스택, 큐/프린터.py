@@ -2,6 +2,9 @@ def solution(priorities, location):
     now = [0] * len(priorities)
     order = []
 
+    if len(now) == 1:
+        return 1
+
     now[location] = 1
 
     while priorities:
@@ -18,7 +21,18 @@ def solution(priorities, location):
                     order.append(1)
                 else:
                     order.append(0)
+        elif 1 not in order:
+            order.append(now.pop())
+
+    return order.index(1) + 1
 
 
-    return order.index(1)+1
+# priorities = [2, 1, 3, 2]
+# location = 2
+# result = 1
 
+priorities = [1, 1, 1]
+location = 2
+result = 1
+
+print(solution(priorities, location))
