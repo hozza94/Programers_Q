@@ -5,10 +5,32 @@
 
 def solution(n, times):
     answer = 0
+
+    mintime = 1
+    maxtime = min(times) * n
+    flag = True
+
+    while mintime <= maxtime:
+        count = 0
+
+        midtime = (mintime + maxtime) // 2
+
+        for i in range(len(times)):
+            count += midtime // times[i]
+            if count > n:
+                maxtime = midtime
+
+        if count == n:
+            answer = midtime
+            break
+        elif count < n:
+            mintime = midtime
+
     return answer
+
 
 n = 6
 times = [7, 10]
 result = 28
 
-print(solution(n,times))
+print(solution(n, times))
