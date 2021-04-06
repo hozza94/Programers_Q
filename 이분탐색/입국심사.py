@@ -6,7 +6,7 @@
 def solution(n, times):
     answer = 0
 
-    mintime = 1
+    mintime = min(times)
     maxtime = min(times) * n
     flag = True
 
