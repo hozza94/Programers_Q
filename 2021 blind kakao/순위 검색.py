@@ -1,7 +1,50 @@
 # info - 3 x 2 x 2 x 2 = 24개 + 점수
 
+from collections import defaultdict
+
+
 def solution(info, query):
     answer = []
+    db = defaultdict(list)
+
+    for inf in info:
+        lang = ["-"]
+        end = ["-"]
+        car = ["-"]
+        foo = ["-"]
+
+        inf = inf.split(" ")
+        score = int(inf[-1])
+        lang.append(inf[0])
+        end.append(inf[1])
+        car.append(inf[2])
+        foo.append(inf[3])
+
+        for l in lang:
+            for e in end:
+                for c in car:
+                    for f in foo:
+                        str = ""
+                        str += l + e + c + f
+                        db[str].append(score)
+
+    for k in db.keys():
+        db[k].sort()
+
+    print(db)
+
+    for q in query:
+        q = q.split(" and ")
+        a = q.pop().split(" ")
+        q.extend(a)
+        str = ""
+        for s in q[:-1]:
+            str += s
+
+        for i in db[str]:
+            if int(q[-1]) <= i:
+                answer.append(len(db[str]) - db[str].index(i))
+                break
 
     return answer
 
