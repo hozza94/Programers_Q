@@ -45,24 +45,43 @@ def solution(info, query):
             if int(q[-1]) <= i:
                 answer.append(len(db[str]) - db[str].index(i))
                 break
+        else:
+            db[str].append(0)
 
     return answer
 
 
-info = ["java backend junior pizza 150",
-        "python frontend senior chicken 210",
-        "python frontend senior chicken 150",
-        "cpp backend senior pizza 260",
-        "java backend junior chicken 80",
-        "python backend senior chicken 50"]
+infos = ["java backend junior pizza 150",
+         "python frontend senior chicken 210",
+         "python frontend senior chicken 150",
+         "cpp backend senior pizza 260",
+         "java backend junior chicken 80",
+         "python backend senior chicken 50"]
 
-query = ["java and backend and junior and pizza 100",
-         "python and frontend and senior and chicken 200",
-         "cpp and - and senior and pizza 250",
-         "- and backend and senior and - 150",
-         "- and - and - and chicken 100",
-         "- and - and - and - 150"]
+querys = ["java and backend and junior and pizza 100",
+          "python and frontend and senior and chicken 200",
+          "cpp and - and senior and pizza 250",
+          "- and backend and senior and - 150",
+          "- and - and - and chicken 100",
+          "- and - and - and - 150"]
 
 result = [1, 1, 1, 1, 2, 4]
 
-print(solution(info, query))
+# def solution(infos, querys):
+#     answer = []
+#     info_list = list()
+#     for info in infos:
+#         info_list.append(info.split(' '))
+#     for query in querys:
+#         split_query = [_ for _ in query.split(' ') if _ != 'and']
+#         res = [info_list[i] for i in range(len(info_list))
+#                if (split_query[0] =='-' or split_query[0] == info_list[i][0])
+#                and (split_query[1] == '-' or split_query[1] == info_list[i][1])
+#                and (split_query[2] == '-' or split_query[2] == info_list[i][2])
+#                and (split_query[3] == '-' or split_query[3] == info_list[i][3])
+#                and (split_query[4] == '-' or int(split_query[4]) <= int(info_list[i][4]))
+#                ]
+#         answer.append(len(res))
+#     return answer
+
+print(solution(infos, querys))
