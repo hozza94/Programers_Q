@@ -24,13 +24,17 @@ def solution(begin, target, words):
         answer = []
         st = [begin]
 
+        # 문제는 이곳에서 무한 반복이 일어나는 경우가 생김 like hit-hot-lot-hot-lot
         while st:
             top = st.pop()
-            answer.append(top)
+            if top not in answer:
+                answer.append(top)
             for i in range(len(G[top])):
-                st.append(G[top][i])
+                if G[top][i] not in answer:
+                    st.append(G[top][i])
             if top == target:
                 return len(answer) - 1
+
 
 def diff(w1, w2):
     diff_count = 0
@@ -43,6 +47,8 @@ def diff(w1, w2):
         return True
     else:
         return False
+
+
 #
 # begin = "hit"
 # target = "cog"
@@ -51,7 +57,13 @@ def diff(w1, w2):
 
 begin = "hit"
 target = "hhh"
-words = ["hhh","hht"]
+words = ["hhh", "hht"]
 result = 2
 
 print(solution(begin, target, words))
+print(solution("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]), 4)
+print(solution("hit", "cog", ["hot", "dot", "dog", "lot", "log"]), 0)
+print(solution("hit", "hot", ["hot", "dot", "dog", "lot", "log"]), 1)
+print(solution("1234567000", "1234567899", [
+    "1234567800", "1234567890", "1234567899"]), 3)
+print(solution("hit", "cog", ["cog", "log", "lot", "dog", "hot"]), 4)
