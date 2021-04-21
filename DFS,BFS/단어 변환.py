@@ -8,11 +8,11 @@ def solution(begin, target, words):
         return 0
     else:
         G = dict()
-        words.reverse()
-        words.append(begin)
-        words.reverse()
 
-        # 아마 여기서 시간 초과가 발생할것으로 예상.. 어떻게 수정하지?
+        # words.reverse()
+        words.append(begin)
+        # words.reverse()
+
         for w1 in words:
             for w2 in words:
                 if diff(w1, w2):
@@ -24,14 +24,17 @@ def solution(begin, target, words):
         answer = []
         st = [begin]
 
+        visit = []
         # 문제는 이곳에서 무한 반복이 일어나는 경우가 생김 like hit-hot-lot-hot-lot
         while st:
             top = st.pop()
-            if top not in answer:
+            if top not in visit:
+                visit.append(top)
                 answer.append(top)
-            for i in range(len(G[top])):
-                if G[top][i] not in answer:
+
+                for i in range(len(G[top])):
                     st.append(G[top][i])
+
             if top == target:
                 return len(answer) - 1
 
@@ -66,4 +69,4 @@ print(solution("hit", "cog", ["hot", "dot", "dog", "lot", "log"]), 0)
 print(solution("hit", "hot", ["hot", "dot", "dog", "lot", "log"]), 1)
 print(solution("1234567000", "1234567899", [
     "1234567800", "1234567890", "1234567899"]), 3)
-print(solution("hit", "cog", ["cog", "log", "lot", "dog", "hot"]), 4)
+# print(solution("hit", "cog", ["cog", "log", "lot", "dog", "hot"]), 4)
