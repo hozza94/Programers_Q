@@ -6,7 +6,14 @@ def solution(n, results):
 
     for res in results:
         dist[res[0]][res[1]] = 1
-        
+        dist[res[1]][res[0]] = -1
+
+    for i in range(1, n+1):
+        for j in range(1, n+1):
+            if dist[i][j] == 1:
+                for k in range(1, n+1):
+                    if dist[j][k] == 1:
+                        dist[i][k] == 1
 
 
     pprint(dist)

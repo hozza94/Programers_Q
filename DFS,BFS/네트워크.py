@@ -1,18 +1,24 @@
 def solution(n, computers):
     answer = 0
     visit = [0] * len(computers)
-    st = []
 
-    for i in range(len(computers)):
+    def dfs(s):
+        st = [s]
+
+        while st:
+            num = st.pop()
+            if visit[num] == 0:
+                visit[num] = 1
+            for i in range(len(computers[0])):
+                if computers[num][i] == 1 and visit[i] == 0:
+                    st.append(i)
+    i = 0
+    while 0 in visit:
         if visit[i] == 0:
-            visit[i] = 1
-            for j in range(i+1, len(computers)):
-                if computers[i][j] == 1:
-                    st.append(j)
-        else:
-            pass
+            dfs(i)
+            answer += 1
+        i += 1
 
-    print(st)
     return answer
 
 

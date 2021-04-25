@@ -12,6 +12,7 @@ def solution(triangle):
             else:
                 W[i][j] = max(W[i - 1][j - 1] + triangle[i][j], W[i - 1][j] + triangle[i][j])
 
+    print(W)
     answer = max(W[length - 1])
     return answer
 

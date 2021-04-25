@@ -9,9 +9,9 @@ def solution(begin, target, words):
     else:
         G = dict()
 
-        # words.reverse()
+        words.reverse()
         words.append(begin)
-        # words.reverse()
+        words.reverse()
 
         for w1 in words:
             for w2 in words:
@@ -33,7 +33,8 @@ def solution(begin, target, words):
                 answer.append(top)
 
                 for i in range(len(G[top])):
-                    st.append(G[top][i])
+                    if G[top][i] not in visit:
+                        st.append(G[top][i])
 
             if top == target:
                 return len(answer) - 1
@@ -69,4 +70,4 @@ print(solution("hit", "cog", ["hot", "dot", "dog", "lot", "log"]), 0)
 print(solution("hit", "hot", ["hot", "dot", "dog", "lot", "log"]), 1)
 print(solution("1234567000", "1234567899", [
     "1234567800", "1234567890", "1234567899"]), 3)
-# print(solution("hit", "cog", ["cog", "log", "lot", "dog", "hot"]), 4)
+print(solution("hit", "cog", ["cog", "log", "lot", "dog", "hot"]), 4)
